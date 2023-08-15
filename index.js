@@ -6,6 +6,8 @@ import connectDB from "./config/db.js";
 const app = express();
 import auth from "./middleware/auth.js";
 import cors from "cors";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 // database connection configuration
 connectDB();
@@ -14,8 +16,9 @@ connectDB();
 app.use(cors());
 
 // middleware
+app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // api routes
 app.use("/api/auth", userRoutes);
